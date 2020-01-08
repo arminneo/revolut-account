@@ -1,9 +1,7 @@
 package com.armin.revolut.endpoints;
 
-import com.armin.revolut.Application;
 import com.armin.revolut.BaseAppTest;
 import com.armin.revolut.Dependencies;
-import com.armin.revolut.data.ContextManager;
 import com.armin.revolut.endpoints.vo.DepositRequest;
 import com.armin.revolut.endpoints.vo.TransferRequest;
 import com.armin.revolut.helpers.GsonResponseTransformer;
@@ -11,8 +9,6 @@ import com.armin.revolut.helpers.JsonResponseTransformerImpl;
 import com.armin.revolut.models.enums.RecordsReason;
 import com.armin.revolut.models.tables.pojos.Records;
 import com.armin.revolut.models.tables.records.AccountRecord;
-import com.armin.revolut.stores.AccountStore;
-import com.armin.revolut.stores.RecordStore;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.*;
 import spark.Spark;

@@ -4,7 +4,6 @@ create table account
 	code VARCHAR(50) not null UNIQUE,
  	user_id INTEGER not null,
 	balance DECIMAL DEFAULT 0 not null,
-	active BOOLEAN not null,
 
 	created_on timestamp DEFAULT CURRENT_TIMESTAMP() NOT NULL,
     updated_on timestamp NULL --
@@ -24,12 +23,12 @@ create table records
 );
 
 
-INSERT INTO account (id, user_id, code, balance, active)
+INSERT INTO account (id, user_id, code, balance)
 VALUES
-(1, 1, '111111', 1000, true),
-(2, 2, '222222', 0, true),
-(3, 3, '333333', 0, true),
-(4, 1, '444444', 0, true);
+(1, 1, '111111', 1000),
+(2, 2, '222222', 0),
+(3, 3, '333333', 0),
+(4, 1, '444444', 0);
 
 
 INSERT INTO records (id, account_id, credit, reason)

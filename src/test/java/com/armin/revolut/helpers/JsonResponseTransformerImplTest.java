@@ -18,6 +18,7 @@ class JsonResponseTransformerImplTest {
     void render() {
         TransferRequest request = new TransferRequest("11111", "22222", BigDecimal.ONE);
         String json = transformer.render(request);
+
     }
 
     @Test

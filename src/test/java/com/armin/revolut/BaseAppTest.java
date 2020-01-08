@@ -3,6 +3,7 @@ package com.armin.revolut;
 import com.armin.revolut.data.ContextManager;
 import com.armin.revolut.stores.AccountStore;
 import com.armin.revolut.stores.RecordStore;
+import com.armin.revolut.stores.TransferStore;
 import spark.Spark;
 
 public class BaseAppTest {
@@ -19,7 +20,6 @@ public class BaseAppTest {
         Spark.awaitInitialization();
         accountStore = Dependencies.getInjector().getInstance(AccountStore.class);
         recordStore = Dependencies.getInjector().getInstance(RecordStore.class);
-
     }
 
     protected void tearDown(){
