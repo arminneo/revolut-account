@@ -1,0 +1,167 @@
+{
+	"info": {
+		"_postman_id": "f88889d4-4a4f-4b6b-a3d3-71d321782a46",
+		"name": "Revolut-Account",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/health",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Account records",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/api/v1/account/222222",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"account",
+						"222222"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Account",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"source\": \"111111\",\n\t\"destination\": \"222222\",\n\t\"amount\": 3\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/v1/account/1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"account",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transfer Money",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"source\": \"111111\",\n\t\"destination\": \"222222\",\n\t\"amount\": 3\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/v1/account/transfer",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"account",
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deposit Money",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"destination\": \"111111\",\n\t\"amount\": 22\n}"
+				},
+				"url": {
+					"raw": "{{host}}/api/v1/account/deposit",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"account",
+						"deposit"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "c217242e-202d-41af-b3e1-d15bdbd417cd",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "288b9668-15e4-4a77-b41c-e9996b6407c1",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "6522d4e7-50f4-40d8-a881-91788831cc3b",
+			"key": "host",
+			"value": "http://localhost:4000",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

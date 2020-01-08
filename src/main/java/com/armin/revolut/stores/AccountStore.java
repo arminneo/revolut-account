@@ -5,6 +5,8 @@ import com.armin.revolut.models.tables.pojos.Account;
 import com.armin.revolut.models.tables.records.AccountRecord;
 
 public interface AccountStore {
+    Account create(int userId);
+
     Account getAccountByCode(String code) throws AccountNotFoundException;
 
     AccountRecord getAccountRecordByCode(String code) throws AccountNotFoundException;

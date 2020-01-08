@@ -6,6 +6,7 @@ import com.armin.revolut.models.tables.records.AccountRecord;
 import com.google.inject.Singleton;
 
 import java.time.LocalDateTime;
+import java.util.Random;
 
 import static com.armin.revolut.models.Tables.ACCOUNT;
 
@@ -14,6 +15,17 @@ public class AccountStoreImpl extends BaseStore implements AccountStore {
 
     public AccountStoreImpl() {
 
+    }
+
+    public Account create(int userId) {
+        String code = makeAccountCode();
+        AccountRecord newAccount = db.getDslContext()
+                .insertInto(ACCOUNT, ACCOUNT.USER_ID, ACCOUNT.CODE)
+                .values(userId, code)
+                .returning()
+                .fetchOne();
+
+        return newAccount.into(Account.class);
     }
 
     @Override
@@ -38,10 +50,19 @@ public class AccountStoreImpl extends BaseStore implements AccountStore {
         return account;
     }
 
-    public void update(AccountRecord accountRecord){
+    public void update(AccountRecord accountRecord) {
         accountRecord.setUpdatedOn(LocalDateTime.now());
         db.getDslContext().executeUpdate(accountRecord);
     }
 
+    public String makeAccountCode() {
+        /**
+         * Just a simple code generator
+         * // TODO: Add a collision detection mechanism
+         */
+        Random rand = new java.util.Random();
+        long x = (long) (rand.nextDouble() * 1000_000_000_000L);
 
+        return String.format("%014d", x);
+    }
 }

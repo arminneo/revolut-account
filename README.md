@@ -1,6 +1,8 @@
 # How to run
 
 # Assumptions
+- Just single currency
+- No validation if user exists
 
 # Tech Stack
 - Spark Java (with Jetty)

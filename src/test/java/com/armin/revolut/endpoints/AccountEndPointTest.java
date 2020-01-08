@@ -58,6 +58,19 @@ class AccountEndPointTest extends BaseAppTest {
     }
 
     @Test
+    void postCreate(){
+        Integer userId = 1;
+        given().port(PORT)
+                .log().all()
+                .post(PREFIX + userId)
+                .then()
+                .log().body()
+                .assertThat().statusCode(201)
+                .assertThat().body("code", notNullValue())
+                .assertThat().body("userId", equalTo(userId));
+    }
+
+    @Test
     void postTransfer() {
         AccountRecord accountSource = accountStore.getAccountRecordByCode(ACCOUNT_SOURCE_CODE);
         AccountRecord accountDest = accountStore.getAccountRecordByCode(ACCOUNT_DEST_CODE);
