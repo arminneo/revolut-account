@@ -1,0 +1,37 @@
+create table account
+(
+	id long AUTO_INCREMENT PRIMARY KEY NOT NULL,
+	code VARCHAR(50) not null UNIQUE,
+ 	user_id INTEGER not null,
+	balance DECIMAL DEFAULT 0 not null,
+	active BOOLEAN not null,
+
+	created_on timestamp DEFAULT CURRENT_TIMESTAMP() NOT NULL,
+    updated_on timestamp NULL --
+
+);
+
+create table records
+(
+    id long AUTO_INCREMENT PRIMARY KEY NOT NULL,
+    account_id long NOT NULL,
+    credit DECIMAL DEFAULT 0 not null,
+    debit DECIMAL DEFAULT 0 not null,
+    reason enum('deposit', 'transfer', 'payout', 'etc') NULL,
+    created_on timestamp DEFAULT CURRENT_TIMESTAMP() NOT NULL,
+
+    CONSTRAINT FK_ACCOUNT_ID FOREIGN KEY (account_id) REFERENCES account(id)
+);
+
+
+INSERT INTO account (id, user_id, code, balance, active)
+VALUES
+(1, 1, '111111', 1000, true),
+(2, 2, '222222', 0, true),
+(3, 3, '333333', 0, true),
+(4, 1, '444444', 0, true);
+
+
+INSERT INTO records (id, account_id, credit, reason)
+VALUES
+(1, 1, 1000, 'deposit');

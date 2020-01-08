@@ -1,15 +1,17 @@
 package com.armin.revolut;
 
 
-import com.google.inject.Binder;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-import com.google.inject.Module;
+import com.armin.revolut.helpers.GsonResponseTransformer;
+import com.armin.revolut.helpers.JsonResponseTransformerImpl;
+import com.armin.revolut.data.ContextManager;
+import com.armin.revolut.data.ContextManagerImpl;
+import com.armin.revolut.stores.*;
+import com.google.inject.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Dependencies implements Module {
+public class Dependencies extends AbstractModule {
     private static final Logger log = LoggerFactory.getLogger(Dependencies.class);
 
     private static Dependencies instance = new Dependencies();
@@ -28,9 +30,11 @@ public class Dependencies implements Module {
     }
 
     @Override
-    public void configure(Binder binder) {
-        //binder.bind(CustomerDao.class).to(CustomerDaoImpl.class);
-        //binder.bind(UserService.class).to(UserServiceImpl.class);
+    protected void configure() {
+        bind(ContextManager.class).to(ContextManagerImpl.class);
+        bind(AccountStore.class).to(AccountStoreImpl.class);
+        bind(RecordStore.class).to(RecordStoreImpl.class);
+        bind(TransferStore.class).to(TransferStoreImpl.class);
+        bind(GsonResponseTransformer.class).to(JsonResponseTransformerImpl.class);
     }
-
 }
