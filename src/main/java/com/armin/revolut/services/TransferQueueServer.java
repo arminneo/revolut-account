@@ -4,6 +4,7 @@ import com.armin.revolut.Dependencies;
 import com.armin.revolut.exceptions.AccountNotFoundException;
 import com.armin.revolut.exceptions.ExceptionMiddleware;
 import com.armin.revolut.exceptions.InsufficientFundsException;
+import com.armin.revolut.exceptions.SourceDestinationSameException;
 import com.armin.revolut.stores.TransferStore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -87,7 +88,8 @@ public class TransferQueueServer {
          */
     }
 
-    public void transfer(String fromAccountCode, String toAccountCode, BigDecimal amount) {
+    public void transfer(String fromAccountCode, String toAccountCode, BigDecimal amount) throws SourceDestinationSameException {
+        if (fromAccountCode.equals(toAccountCode)) throw new SourceDestinationSameException(fromAccountCode);
         transfer(new TransferSourceOrder(fromAccountCode, toAccountCode, amount));
     }
 

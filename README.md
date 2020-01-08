@@ -3,6 +3,14 @@
 # Assumptions
 - Just single currency
 - No validation if user exists
+- 
+
+# Approaches
+## Concurrency and race condition
+I used blocking queue for payment and deposit. Synchronization block for thread safety. And transaction for data integrity.
+## Test coverage
+86% test coverage.
+Covering 
 
 # Tech Stack
 - Spark Java (with Jetty)

@@ -4,6 +4,7 @@ import com.armin.revolut.Dependencies;
 import com.armin.revolut.core.EndPoint;
 import com.armin.revolut.endpoints.vo.*;
 import com.armin.revolut.exceptions.InsufficientFundsException;
+import com.armin.revolut.exceptions.SourceDestinationSameException;
 import com.armin.revolut.helpers.ModelValidator;
 import com.armin.revolut.models.tables.pojos.Account;
 import com.armin.revolut.models.tables.pojos.Records;
@@ -36,7 +37,7 @@ public class AccountEndPoint extends EndPoint {
     public void route() {
         path("/account", () -> {
             get("/:id", this::getAccount, transform);
-            post("/:id", APPLICATION_JSON, this::postCreate, transform);
+            post("/create/:id", APPLICATION_JSON, this::postCreate, transform);
             post("/transfer", APPLICATION_JSON, this::postTransfer, transform);
             post("/deposit", APPLICATION_JSON, this::postDeposit, transform);
         });
@@ -66,6 +67,10 @@ public class AccountEndPoint extends EndPoint {
     public String postTransfer(Request request, Response response) throws Exception {
         TransferRequest transfer = transform.fromJson(request.body(), TransferRequest.class);
         ModelValidator.validate(transfer);
+
+        if (transfer.getSource().equals(transfer.getDestination())) {
+            throw new SourceDestinationSameException(transfer.getSource());
+        }
 
         Account sourceAccount = accountStore.getAccountByCode(transfer.getSource());
         accountStore.getAccountRecordByCode(transfer.getDestination());

@@ -62,7 +62,7 @@ class AccountEndPointTest extends BaseAppTest {
         Integer userId = 1;
         given().port(PORT)
                 .log().all()
-                .post(PREFIX + userId)
+                .post(PREFIX + "create/" + userId)
                 .then()
                 .log().body()
                 .assertThat().statusCode(201)
@@ -104,6 +104,7 @@ class AccountEndPointTest extends BaseAppTest {
 
     @Test
     public void postTransferValidation() {
+        // Not provided
         given().port(PORT)
                 .log().all()
                 .contentType(ContentType.JSON)
@@ -112,6 +113,7 @@ class AccountEndPointTest extends BaseAppTest {
                 .log().body()
                 .assertThat().statusCode(400);
 
+        // Insufficient funds
         TransferRequest request = new TransferRequest(ACCOUNT_SOURCE_CODE, ACCOUNT_DEST_CODE, BigDecimal.valueOf(99999));
         given().port(PORT)
                 .log().all()
@@ -122,7 +124,30 @@ class AccountEndPointTest extends BaseAppTest {
                 .log().body()
                 .assertThat().statusCode(402);
 
+        // Wrong code
         request.setSource("wrong-code");
+        given().port(PORT)
+                .log().all()
+                .body(request)
+                .contentType(ContentType.JSON)
+                .post(PREFIX + "transfer")
+                .then()
+                .log().body()
+                .assertThat().statusCode(400);
+
+        // Account not found
+        request.setSource("000000");
+        given().port(PORT)
+                .log().all()
+                .body(request)
+                .contentType(ContentType.JSON)
+                .post(PREFIX + "transfer")
+                .then()
+                .log().body()
+                .assertThat().statusCode(404);
+
+        // Same source problem
+        request = new TransferRequest(ACCOUNT_SOURCE_CODE, ACCOUNT_SOURCE_CODE, BigDecimal.valueOf(11));
         given().port(PORT)
                 .log().all()
                 .body(request)
