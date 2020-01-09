@@ -34,8 +34,9 @@ Application running on TCP PORT 4000 make sure it is open.
 - No user management and no validation if user exists
 - No proxy and caching
 - No gateway
-- No money blocking. I didn't added: "The money blocking mechanism" to keep it simple and small.
-- Create account is there to help in demonestration. It is not a real deal.
+- No money blocking (Reduce from account before transfer order finished). 
+  -  Reason: I didn't added: "The money blocking mechanism" to keep it simple and small.
+- Create account is there to help in demonstration. It is not a real deal.
 
 # Approaches
 ## Concurrency and race condition

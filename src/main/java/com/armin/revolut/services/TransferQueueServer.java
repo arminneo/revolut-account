@@ -66,9 +66,12 @@ public class TransferQueueServer {
     private void doTransfer(TransferOrder order) {
         try {
             if (order instanceof TransferSourceOrder) {
-                store.transfer((TransferSourceOrder) order);
+                TransferSourceOrder transfer = (TransferSourceOrder) order;
+                log.info("Transfer order > from {} to {} amount {}", transfer.getFrom(), transfer.getTo(), transfer.getAmount());
+                store.transfer(transfer);
             } else if (order instanceof TransferDestinationOrder) {
                 TransferDestinationOrder deposit = (TransferDestinationOrder) order;
+                log.info("Deposit order > to {} amount {}", deposit.getTo(), deposit.getAmount());
                 store.deposit(deposit.getTo(), deposit.getAmount());
             }
             informUser(order, null);

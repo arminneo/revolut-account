@@ -56,12 +56,12 @@ public class AccountStoreImpl extends BaseStore implements AccountStore {
     }
 
     public String makeAccountCode() {
-        /**
+        /*
          * Just a simple code generator
          * // TODO: Add a collision detection mechanism
          */
         Random rand = new java.util.Random();
-        long x = (long) (rand.nextDouble() * 1000_000_000_000L);
+        long x = (long) (rand.nextDouble() * 10_000_000_000_000L);
 
         return String.format("%014d", x);
     }
