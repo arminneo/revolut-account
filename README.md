@@ -50,7 +50,7 @@ I used blocking queue for payment and deposit. Synchronization block for thread 
 
 # API calling for test purpose
 You can you use [Post Man 2.1+](https://www.getpostman.com/) there is PostMan collection file <a href="Revolut-Account.postman_collection.json">Revolut-Account.postman_collection.json</a>  
-API root path: http://localhost/api/v1
+API root path: http://localhost:4000/api/v1
 
 | HTTP Verb | URL | Description |
 | --------- | --- | ----------- | 
