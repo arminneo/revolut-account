@@ -1,9 +1,7 @@
 package com.armin.revolut.helpers;
 
 import com.google.gson.*;
-import spark.ResponseTransformer;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

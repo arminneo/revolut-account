@@ -3,7 +3,6 @@ package com.armin.revolut.core;
 import com.armin.revolut.Dependencies;
 import com.armin.revolut.helpers.GsonResponseTransformer;
 import com.google.gson.Gson;
-import spark.ResponseTransformer;
 
 public abstract class EndPoint {
     public static final String APPLICATION_JSON = "application/json";

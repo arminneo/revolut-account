@@ -1,7 +1,5 @@
 package com.armin.revolut.exceptions;
 
-import com.google.gson.annotations.Expose;
-
 public class ApiException extends RuntimeException {
     public ApiException() {
     }

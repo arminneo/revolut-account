@@ -2,9 +2,7 @@ package com.armin.revolut.stores;
 
 import com.armin.revolut.models.enums.RecordsReason;
 import com.armin.revolut.models.tables.pojos.Records;
-import com.armin.revolut.models.tables.records.RecordsRecord;
 import com.google.inject.Singleton;
-import org.jooq.Result;
 
 import java.math.BigDecimal;
 import java.util.List;
