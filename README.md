@@ -12,14 +12,14 @@ java --version
 [4] Make sure you have Maven 3.6 or higher:
 ```` shell script
 mvn -v
-```` 
+````
 [5] Make sure you are in the application's directory.
 
 [6] Run the application using following command:
 ```` shell script
 mvn package
-java -jar ./target/revolut-account-1.0-SNAPSHOT.jar 
-```` 
+java -jar ./target/revolut-account-1.0-SNAPSHOT.jar
+````
 
 [*] To test the application
 ```` shell script
@@ -34,6 +34,8 @@ Application running on TCP PORT 4000 make sure it is open.
 - No user management and no validation if user exists
 - No proxy and caching
 - No gateway
+- No money blocking. I didn't added: "The money blocking mechanism" to keep it simple and small.
+- Create account is there to help in demonestration. It is not a real deal.
 
 # Approaches
 ## Concurrency and race condition
@@ -49,14 +51,14 @@ I used blocking queue for payment and deposit. Synchronization block for thread 
   - ...
 
 # API calling for test purpose
-You can you use [Post Man 2.1+](https://www.getpostman.com/) there is PostMan collection file <a href="Revolut-Account.postman_collection.json">Revolut-Account.postman_collection.json</a>  
+You can you use [Post Man 2.1+](https://www.getpostman.com/) there is PostMan collection file <a href="Revolut-Account.postman_collection.json">Revolut-Account.postman_collection.json</a>
 API root path: http://localhost:4000/api/v1
 
 | HTTP Verb | URL | Description |
-| --------- | --- | ----------- | 
+| --------- | --- | ----------- |
 | GET | /account/:code | Get an account and its transactions |
 | POST | /account/create/:userId | Creates a new account with give userId
-| POST | /account/transfer | Transfer an amount money from source to destination account | 
+| POST | /account/transfer | Transfer an amount money from source to destination account |
 | POST | /account/deposit | Deposit an amount of money to source account |
 
 Transfer body request content
@@ -77,14 +79,14 @@ Deposit body request content
 ````
 
 ## Note
-You can use `111111`, `222222`, `333333` as sample account code already seeded into system. 
+You can use `111111`, `222222`, `333333` as sample account code already seeded into system.
 
 # Tech Stack
 - Java 9
 - Spark Java (with Jetty)
 - Jooq for database connection
 - H2 in-memory database
- 
+
 # Expectations
 - Thread-safety
 - Big test coverage as you can also cover all the sad paths
