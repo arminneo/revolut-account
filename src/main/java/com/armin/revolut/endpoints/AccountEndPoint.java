@@ -36,15 +36,15 @@ public class AccountEndPoint extends EndPoint {
     @Override
     public void route() {
         path("/account", () -> {
-            get("/:id", this::getAccount, transform);
-            post("/create/:id", APPLICATION_JSON, this::postCreate, transform);
+            get("/:code", this::getAccount, transform);
+            post("/create/:userId", APPLICATION_JSON, this::postCreate, transform);
             post("/transfer", APPLICATION_JSON, this::postTransfer, transform);
             post("/deposit", APPLICATION_JSON, this::postDeposit, transform);
         });
     }
 
     private AccountResponse postCreate(Request request, Response response) {
-        AccountCreateRequest req = new AccountCreateRequest(request.params(":id"));
+        AccountCreateRequest req = new AccountCreateRequest(request.params(":userId"));
         ModelValidator.validate(req);
         int userId = Integer.parseInt(req.getUserId());
 
@@ -54,7 +54,7 @@ public class AccountEndPoint extends EndPoint {
     }
 
     public AccountResponse getAccount(Request request, Response response) throws Exception {
-        AccountRequest req = new AccountRequest(request.params(":id"));
+        AccountRequest req = new AccountRequest(request.params(":code"));
         ModelValidator.validate(req);
 
         Account account = accountStore.getAccountByCode(req.getCode());
